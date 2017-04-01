@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <include resource="_logback-common.xml" />
+
+    <root level="INFO">
+        <appender-ref ref="development-stderr" />
+        <appender-ref ref="development-file" />
+    </root>
+
+    <logger name="com.github.laysakura" level="DEBUG" />
+
+</configuration>

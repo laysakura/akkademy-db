@@ -33,6 +33,7 @@ lazy val `akkademy-db` = (project in file("akkademy-db")).
   settings(commonSettings: _*).
   settings(
     libraryDependencies ++= Seq(
+      "com.typesafe.akka" %% "akka-slf4j" % versions.akka,
       "com.typesafe.akka" %% "akka-actor" % versions.akka,
       "com.typesafe.akka" %% "akka-testkit" % versions.akka % "test"
     )

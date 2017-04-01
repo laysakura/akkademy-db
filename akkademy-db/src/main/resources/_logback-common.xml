@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<included>
+
+    <!-- ログファイルを置くディレクトリ -->
+    <property name="logdir-development" value="logs" />
+
+    <!-- アプリケーション名。ログファイルの名前にもログの中身にも使用する。 -->
+    <property name="appname" value="AkkademyDb" />
+
+    <!-- See: https://logback.qos.ch/manual/layouts_ja.html#ClassicPatternLayout -->
+    <property name="pattern-development" value="%date{yyyy-MM-dd HH:mm:ss.SSS, Asia/Tokyo} [%-5level] appname: ${appname:-${appname-default}}  logger: %logger  class: %class  method: %method  thread: %thread  MDC: %mdc  %n%message%n%xException%n" />
+
+
+    <!-- java.util.logging で吐かれるログをlogback制御できるようにする。 -->
+    <!-- See: http://qiita.com/namutaka/items/61f8a99946f869cad6b3#javautillogging-%E7%95%A5%E7%A7%B0-jul -->
+    <contextListener class="ch.qos.logback.classic.jul.LevelChangePropagator">
+        <resetJUL>true</resetJUL>
+    </contextListener>
+
+    <!-- 以下、appender定義 -->
+
+    <!-- 開発時にコンソールにログを出すためのappender -->
+    <appender name="development-stderr" class="ch.qos.logback.core.ConsoleAppender">
+        <target>System.err</target>
+        <encoder>
+            <pattern>${pattern-development}</pattern>
+        </encoder>
+    </appender>
+
+    <!-- 開発時にファイルにログを出すためのappender -->
+    <appender name="development-file" class="ch.qos.logback.core.FileAppender">
+        <file>${logdir-development}/${appname:-${appname-default}}.log</file>
+        <encoder>
+            <pattern>${pattern-development}</pattern>
+        </encoder>
+    </appender>
+</included>
