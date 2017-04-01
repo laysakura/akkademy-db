@@ -4,11 +4,8 @@
     <!-- ログファイルを置くディレクトリ -->
     <property name="logdir-development" value="logs" />
 
-    <!-- アプリケーション名。ログファイルの名前にもログの中身にも使用する。 -->
-    <property name="appname" value="AkkademyDb" />
-
     <!-- See: https://logback.qos.ch/manual/layouts_ja.html#ClassicPatternLayout -->
-    <property name="pattern-development" value="%date{yyyy-MM-dd HH:mm:ss.SSS, Asia/Tokyo} [%-5level] appname: ${appname:-${appname-default}}  logger: %logger  class: %class  method: %method  thread: %thread  MDC: %mdc  %n%message%n%xException%n" />
+    <property name="pattern-development" value="%date{yyyy-MM-dd HH:mm:ss.SSS, Asia/Tokyo} [%-5level] appname: ${appname}  logger: %logger  class: %class  method: %method  thread: %thread  MDC: %mdc  %n%message%n%xException%n" />
 
 
     <!-- java.util.logging で吐かれるログをlogback制御できるようにする。 -->
@@ -29,7 +26,7 @@
 
     <!-- 開発時にファイルにログを出すためのappender -->
     <appender name="development-file" class="ch.qos.logback.core.FileAppender">
-        <file>${logdir-development}/${appname:-${appname-default}}.log</file>
+        <file>${logdir-development}/${appname}.log</file>
         <encoder>
             <pattern>${pattern-development}</pattern>
         </encoder>

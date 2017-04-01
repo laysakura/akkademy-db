@@ -16,7 +16,11 @@ lazy val versions = new {
 
 lazy val root = (project in file(".")).
   settings(commonSettings: _*).
-  aggregate(`akkademy-db`)
+  aggregate(
+    `common`,
+    `akkademy-core`,
+    `akkademy-server`
+  )
 
 lazy val common = (project in file("common")).
   settings(commonSettings: _*).
@@ -24,18 +28,29 @@ lazy val common = (project in file("common")).
     libraryDependencies ++= Seq(
       "ch.qos.logback" % "logback-classic" % versions.logback,
 
+      "com.typesafe.akka" %% "akka-slf4j" % versions.akka,
+      "com.typesafe.akka" %% "akka-actor" % versions.akka,
+      "com.typesafe.akka" %% "akka-testkit" % versions.akka % "test",
+
       "org.scalatest" %% "scalatest" % versions.scalatest % "test",
       "org.specs2" %% "specs2-mock" % versions.specs2 % "test"
     )
   )
 
-lazy val `akkademy-db` = (project in file("akkademy-db")).
+lazy val `akkademy-core` = (project in file("akkademy-core")).
   settings(commonSettings: _*).
   settings(
+    name := "akkademy-core",
     libraryDependencies ++= Seq(
-      "com.typesafe.akka" %% "akka-slf4j" % versions.akka,
-      "com.typesafe.akka" %% "akka-actor" % versions.akka,
-      "com.typesafe.akka" %% "akka-testkit" % versions.akka % "test"
     )
   ).
   dependsOn(common % "test->test;compile->compile")
+
+lazy val `akkademy-server` = (project in file("akkademy-server")).
+  settings(commonSettings: _*).
+  settings(
+    name := "akkademy-server",
+    libraryDependencies ++= Seq(
+    )
+  ).
+  dependsOn(`akkademy-core` % "test->test;compile->compile")
