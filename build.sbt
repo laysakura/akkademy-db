@@ -36,4 +36,5 @@ lazy val `akkademy-db` = (project in file("akkademy-db")).
       "com.typesafe.akka" %% "akka-actor" % versions.akka,
       "com.typesafe.akka" %% "akka-testkit" % versions.akka % "test"
     )
-  )
+  ).
+  dependsOn(common % "test->test;compile->compile")
