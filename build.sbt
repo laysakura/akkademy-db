@@ -1,7 +1,7 @@
 lazy val commonSettings = Seq(
   organization := "com.github.laysakura",
   scalaVersion := "2.12.1",
-  scalacOptions ++= Seq("-deprecation", "-feature", "-unchecked", "-Xlint"),
+  scalacOptions ++= Seq("-deprecation", "-feature", "-unchecked", "-Xlint", "-language:postfixOps"),
   version := (version in ThisBuild).value,
   parallelExecution in ThisBuild := false
 )
